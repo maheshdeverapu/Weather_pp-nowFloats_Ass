@@ -52,28 +52,29 @@ const SearchWeather =()=>{
 // console.log(...searchArea.weather)
 
     return(
-        <div><div>
+        <div className="search_content">
+            <div className="search_main_content">
 
-<input onChange={(e)=>{setSearchState(e.target.value)}} placeholder="search by City / State / Country name" />
-<button onClick={(e)=>{searchHandling(e)}}>Search</button>
+<input className="input_cont" onChange={(e)=>{setSearchState(e.target.value)}} placeholder="search by City / State / Country name" />
+<button className="button_cont" onClick={(e)=>{searchHandling(e)}}>Search</button>
         </div>
         {!isState?"": 
-        <div>
-        <p>current Weather in {searchArea.name}</p>
-                            <p>temp:{searchArea.main.temp}°C</p>
+        <div className="searched_cont">
+        <p  className="current_location">current Weather in {searchArea.name}</p>
+                            <p className="location_data">temp:{searchArea.main.temp}°C</p>
 
                             <img src={`https://openweathermap.org/img/wn/${searchArea.weather[0].icon}@2x.png`} alt={searchArea.weather[0].description}></img>
-                            <p>{searchArea.weather[0].description}</p>
-                            <p>Humidity:{searchArea.main.humidity}%</p>
-                            <p>Wind :{searchArea.wind.speed}km/hr</p>
-                            <p>feels_like:{searchArea.main.feels_like}</p>
+                            <p className="location_data_des">{searchArea.weather[0].description}</p>
+                            <p className="location_data">Humidity:{searchArea.main.humidity}%</p>
+                            <p className="location_data">Wind :{searchArea.wind.speed}km/hr</p>
+                            <p className="location_data">feels_like:{searchArea.main.feels_like}</p>
 
         </div>
 }
         <div className="forcast_content">
             {isForcastState?searchForcast.map((ele,i)=>{
                 return(
-                    <div key={i} >
+                    <div key={i}  className="forcast_inner_content" >
                         <p>{ele.pop}</p>
                         <p>{ele.dt_txt}</p>
                         <p>{ele.wind.speed} km/hr</p>
