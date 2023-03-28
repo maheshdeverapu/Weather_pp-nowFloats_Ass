@@ -1,14 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const AppContext = createContext({
-    selectedLocation:"",
-    setSelectedLocation:()=>{},
     favoriteLocations:[],
     setFavoriteLocations:()=>{}
 });
 
 export const AppProvider = ({ children }) => {
-  const [selectedLocation, setSelectedLocation] = useState("");
   const [favoriteLocations, setFavoriteLocations] = useState(
     JSON.parse(localStorage.getItem("favoriteLocations"))
     );
@@ -16,7 +13,7 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ selectedLocation, setSelectedLocation, favoriteLocations, setFavoriteLocations }}
+      value={{favoriteLocations, setFavoriteLocations }}
     >
       {children}
     </AppContext.Provider>

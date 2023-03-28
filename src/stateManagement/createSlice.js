@@ -16,4 +16,5 @@ const dataSlice = createSlice({
 })
 export const {addDatas,callFunction} = dataSlice.actions;
 export const getAllDatas = (state) => state.datas.datas
+export const sgetAllDatas = (state) => state.datas.callFunc
 export default dataSlice.reducer;
