@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { json, useNavigate } from "react-router-dom";
 import { addDatas } from "../stateManagement/createSlice";
 import { getAllDatas } from "../stateManagement/createSlice";
+import Header from "./header";
 import "./home.css";
 const Home = () => {
     const dataText = 'harry';
@@ -46,22 +47,20 @@ navigate("/search")
 
     return (
                     <div className="home_content">
-                        <div className="header">
-                            <h2>Weather Application</h2>
-                        </div>
+                        <Header/>
                         <div className="search_icon" onClick={(e)=>{searchHandle(e)}}>
                            click here to search
                         </div>
                         <div className="weather_data" onClick={(e)=>{currentLocationHandle(e)}}>
                             <p className="current_location">current Weather in {data.name}</p>
-                            <p className="location_data">temp:{data.temp}°C</p>
+                            <p className="location_data">temp :{data.temp}°C</p>
     
 
-                            <img src={`https://openweathermap.org/img/wn/${data.icon}@2x.png`} alt={data.description}></img>
+                            <img className="image_size" src={`https://openweathermap.org/img/wn/${data.icon}.png`} alt={data.description}></img>
                             <p className="location_data_des">{data.description}</p>
-                            <p className="location_data">Humidity:{data.humidity}%</p>
+                            <p className="location_data">Humidity :{data.humidity}%</p>
                             <p className="location_data">Wind :{data.speed}km/hr</p>
-                            <p className="location_data">feels_like:{data.feels_like}</p>
+                            {/* <p className="location_data">feels_like:{data.feels_like}</p> */}
                             {/* <p>lat:{data.lat}</p>
                             <p>lon:{data.lon}</p>
                             <p>pressure:{data.pressure}</p>

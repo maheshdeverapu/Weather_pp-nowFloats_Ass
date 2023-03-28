@@ -9,8 +9,11 @@ const dataSlice = createSlice({
         addDatas : (state,{payload})=>{
             state.datas = payload;
         },
+        callFunction:(state,{payload})=>{
+            state.callFunc = payload;
+        }
     }
 })
-export const {addDatas} = dataSlice.actions;
+export const {addDatas,callFunction} = dataSlice.actions;
 export const getAllDatas = (state) => state.datas.datas
 export default dataSlice.reducer;

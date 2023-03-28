@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllDatas } from "../stateManagement/createSlice";
 import React,{ useState } from "react";
 import "./search.css"
+import Header from "./header";
 const SearchWeather =()=>{
     const [searchState,setSearchState] = useState("");
     const [searchArea,setSearchArea] = useState([])
@@ -16,10 +17,12 @@ const SearchWeather =()=>{
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchState}&appid=0d038ed3980cf2432f78d78a92010698&units=metric`)
         .then(res=>res.json())
         .then((response)=>{
-                // console.log({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind})
-                // setData({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind})
-                // GetWeatherDetails({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind})
-                if(response){ setIsState(true)
+            if(response.message =='Nothing to geocode' ||response.message== 'city not found'){
+                setIsState(false);
+                    return alert('please enter valid data')
+            }
+                else{ 
+                    setIsState(true)
                 console.log(response)
                  setSearchArea(response)
                  arr = JSON.parse(localStorage.getItem("recentSearch"))
@@ -33,29 +36,30 @@ const SearchWeather =()=>{
                  localStorage.setItem("recentSearch",JSON.stringify(arr))
                 }
                 // dispatch(addDatas({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind}))
-            }).catch((err)=>{setIsState(false);console.log(err); return alert('please enter valid data')})
+            }).catch((err)=>{setIsState(false);console.log(err); })
             fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=${searchState}&appid=0d038ed3980cf2432f78d78a92010698&units=metric`)
             .then(res=>res.json())
             .then((response)=>{
-                // console.log({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind})
-                // setData({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind})
-                // GetWeatherDetails({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind})
                 if(response){
                     console.log(...response.list)
                     setSearchForcast(response.list);
                     setIsForcastState(true)
                 } 
-                // dispatch(addDatas({...response.coord, ...response.main, name:response.name, ...response.weather[0], ...response.wind}))
+                else{
+                    setIsForcastState(false);
+                    return alert('please enter valid data')
+                }
+                
             })
         .catch((err)=>{setIsForcastState(false);console.log(err); })
     }
-// console.log(...searchArea.weather)
 
     return(
         <div className="search_content">
+            {/* <Header/> */}
             <div className="search_main_content">
 
-<input className="input_cont" onChange={(e)=>{setSearchState(e.target.value)}} placeholder="search by City / State / Country name" />
+<input className="input_cont" onChange={(e)=>{setSearchState(e.target.value)}} placeholder="search by City / State / Country name" value={searchState}/>
 <button className="button_cont" onClick={(e)=>{searchHandling(e)}}>Search</button>
         </div>
         {!isState?"": 
@@ -67,19 +71,23 @@ const SearchWeather =()=>{
                             <p className="location_data_des">{searchArea.weather[0].description}</p>
                             <p className="location_data">Humidity:{searchArea.main.humidity}%</p>
                             <p className="location_data">Wind :{searchArea.wind.speed}km/hr</p>
-                            <p className="location_data">feels_like:{searchArea.main.feels_like}</p>
+                            {/* <p className="location_data">feels_like:{searchArea.main.feels_like}</p> */}
 
         </div>
 }
+            {isForcastState&&<h2 className="six_day_forcast">Six days forcast weather</h2>}
         <div className="forcast_content">
             {isForcastState?searchForcast.map((ele,i)=>{
                 return(
                     <div key={i}  className="forcast_inner_content" >
-                        <p>{ele.pop}</p>
-                        <p>{ele.dt_txt}</p>
-                        <p>{ele.wind.speed} km/hr</p>
-                        <p>{ele.weather[0].description}</p>
+                        {/* <li key={data.dt}> */}
+              <p>{new Date(ele.dt * 1000).toLocaleDateString()}</p>
+              <p>{new Date(ele.dt_txt).toLocaleTimeString()}</p>
+                        {/* <p>{ele.pop}</p> */}
+                        {/* <p>{ele.dt_txt}</p> */}
                         <img src={`https://openweathermap.org/img/wn/${ele.weather[0].icon}@2x.png`} alt={searchArea.weather[0].description}></img>
+                        <p>{ele.weather[0].description}</p>
+                        <p>Wind :{ele.wind.speed} km/hr</p>
 
                     </div>
                 )

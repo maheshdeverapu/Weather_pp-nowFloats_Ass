@@ -4,7 +4,8 @@
     min-height:100vh;
 
     margin-left: auto;
-    padding-top: 200px;
+    padding-top: 100px;
+
 
 }
 .input_cont{
@@ -12,6 +13,7 @@
     height: 60px;
     border-radius: 5px;
     font-size: 20px;
+    box-shadow: 10px 10px 20px gray;
 }
 .button_cont{
     width: 100px;
@@ -20,12 +22,14 @@
     background-color: rgb(70, 150, 255);
     font-size: 18px;
     font-weight: 10px;
+    box-shadow: 10px 10px 20px gray;
 }
 .button_cont:hover{
 background-color:rgb(58, 119, 199) ;
 color: rgb(207, 207, 207);
 font-size: 20px;
 font-weight: 20px;
+
 }
 .button_cont:hover{
     background-color:rgb(51, 105, 176) ;
@@ -44,7 +48,7 @@ font-weight: 20px;
     display: flex;
     flex-direction: column;
     width: 400px;
-    height: 500px;
+    height: 380px;
     line-height: 0px;
     align-items: center;
     /* flex-wrap: wrap; */
@@ -53,11 +57,19 @@ font-weight: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 45px;
+    max-width: 1000px;
+    margin: auto;
+    justify-content: center;
+    padding-bottom: 100px;
 }
 .forcast_inner_content{
     background-color:  rgb(70, 150, 255);
     padding: 0 20px;
     border-radius: 10px;
 
+}
+.six_day_forcast{
+    text-align: center;
+    margin-bottom: 60px;
 }
