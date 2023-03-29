@@ -1,14 +1,12 @@
 import { createContext, useState } from "react";
 
 export const AppContext = createContext({
-    favoriteLocations:[],
+    favoriteLocations:"",
     setFavoriteLocations:()=>{}
 });
 
 export const AppProvider = ({ children }) => {
-  const [favoriteLocations, setFavoriteLocations] = useState(
-    JSON.parse(localStorage.getItem("favoriteLocations"))
-    );
+  const [favoriteLocations, setFavoriteLocations] = useState("");
 
 
   return (

@@ -23,7 +23,8 @@
 }
 .search_icon:hover{
     background-color: rgb(61, 129, 218);
-
+    transform: translateY(-2px);
+    cursor: pointer;
 }
 .search_icon:active{
     background-color: rgb(50, 106, 180);
@@ -37,10 +38,12 @@
     flex-direction: column;
     line-height: 0px;
     box-shadow: 10px 10px 40px gray;
+    transition: transform 0.3s ease-in-out;
 }
 .weather_data:hover{
-    background-color:rgb(87, 148, 228); 
-
+    background-color:rgb(93, 153, 232); 
+    transform: translateY(-2px);
+    cursor: pointer;
 
 }
 .weather_data:active{
@@ -66,6 +69,7 @@
 .fav_loc:hover{
     background-color: rgb(118, 178, 255);
     padding: 10px;
+    cursor: pointer;
 }
 .fav_content>h3{
     font-size: 30px;

@@ -38,8 +38,11 @@ const SearchWeather = () => {
 
                         arr.push(searchState)
                     } else {
-                        arr.splice(0, 1);
-                        arr.push(searchState)
+                        if(!searchState==""){
+                            
+                            arr.splice(0, 1);
+                            arr.push(searchState)
+                        }
                     }
                     localStorage.setItem("recentSearch", JSON.stringify(arr))
                 }
